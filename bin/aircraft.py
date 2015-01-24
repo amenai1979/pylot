@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import math_utilities
+from bin.math_utilities import *
 class Aircraft:
     """An attempt to model an aircraft"""
     def __init__(self, model="PA38", make="Piper", max_weight=1670, tail_number="N9182A"):
@@ -13,7 +13,8 @@ class Aircraft:
         self.model = model
         self.make = make
         self.tail_number = tail_number
-        self.enveloppe=[]
+
+
     def weight_ok(self, weight):
         """
         :param weight: the current weight of an aircraft instance
@@ -23,13 +24,17 @@ class Aircraft:
             return True
         else:
             return False
+
+
     def __repr__(self):
         """
-        makes representig the main parameters easier to consume
+        makes representing the main parameters easier to consume
         :return:
         """
         return 'make: {}, model {}, max tkoff weight: {}, tail number: {}'.format(self.make, self.model, self.max_weight, self.tail_number)
-    def bal_envelope(self, mini_weight, maxi_weight, mini_cg, maxi_cg, mid_weight, mid_cg):
+
+
+    def set_balEnvelope(self, mini_weight, mid_weight, maxi_weight, mini_cg, mid_cg,maxi_cg):
         """
         Allows defining the weight and balance envelope
         :param mini_weight: defines the minimal weight reference in the weight and balance chart of the aircraft
@@ -38,12 +43,13 @@ class Aircraft:
         :param maxi_cg: defines the minimum distance to the cg datum in the weight and balance chart of the aircraft
         :param mid_weight: defines the weight component of the point generally found on the north west of the weight and balance chart of the aircraft
         :param mid_cg: defines the cg distance component of the point generally found on the north west of the weight and balance chart of the aircraft
-        :return:
+        :return: None for now
         """
-        self.envelope = [(mini_cg,mini_weight),(mini_cg,mid_weight),(mid_cg,maxi_weight), (maxi_cg,max_weight), (max_cg,mini_weight)]
+        self.balEnvelope = Polygon((mini_cg,mini_weight),(mini_cg,mid_weight),(mid_cg,maxi_weight), (maxi_cg,maxi_weight), (maxi_cg,mini_weight))
+
     def in_envelope(self, point):
         """
-        :param point: defines a calculated weight and balance point
+        :param point: defines a calculated weight and balance point represented as a tuple always start with cg coordinates then with weight
         :return: True if a point is in the envelope false otherwise
         """
-        return math_utilities.point_inside_polygon(point,self.envelope)
+        return self.balEnvelope.point_inside_polygon(point[0],point[1])
