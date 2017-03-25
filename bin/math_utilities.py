@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 # determine if a point is inside a given polygon or not
 # Polygon is a list of (x,y) pairs.
 # adapted from the following page (thank you) : http://www.ariel.com.au/a/python-point-int-poly.html

@@ -1,6 +1,5 @@
-#!/usr/bin/python3
 #Demonstrates the use of the pylot classes. May require python 3
-#To execute from a commandline: python3 pylot_demo.py
+#To execute from a commandline: python pylot_demo.py
 __author__ = 'Alexandre Menai'
 from bin.aircraft import *
 if __name__=="__main__":

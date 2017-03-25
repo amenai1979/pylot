@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from bin.math_utilities import *
 class Aircraft:
     """An attempt to model an aircraft"""
